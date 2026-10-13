@@ -1,0 +1,4 @@
+{"imposto": 6, "gastos_fixos_mes": 4500, "vendas_mes": 30000, "lucro": 15, "guardar_mes": 2,
+ "canal_padrao": "credito",
+ "canais": {"pix": {"pct": 0, "fixo": 0}, "dinheiro": {"pct": 0, "fixo": 0}, "debito": {"pct": 1.5, "fixo": 0},
+            "credito": {"pct": 3.5, "fixo": 0}, "marketplace": {"pct": 18, "fixo": 5}}}
