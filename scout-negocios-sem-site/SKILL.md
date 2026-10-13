@@ -7,7 +7,7 @@ description: Para quem vende site, landing page, loja virtual, perfil no Google,
 
 Objetivo: transformar "quero vender sites em Cidade X" numa lista de negócios **que existem, têm clientes e precisam do que você vende**, com um diagnóstico de 1 página para abrir cada conversa. Negócio sem site e com 300 avaliações no Google vale mais do que negócio sem site e sem clientes: é isso que a nota de oportunidade mede.
 
-> **Skill gratuita da Trentin Solutions** · criada por Ivaldo Trentin · trentinsolutions.com.br · versão 1.0
+> **Skill gratuita da Trentin Solutions** · criada por Ivaldo Trentin · trentinsolutions.com.br · versão 1.1
 > Uso livre, inclusive comercial, desde que este crédito seja mantido (ver LICENSE.md).
 
 ## Regras fixas (nunca quebrar)
@@ -17,6 +17,7 @@ Objetivo: transformar "quero vender sites em Cidade X" numa lista de negócios *
 - **Diagnóstico honesto:** cada item precisa ter sido verificado. Nada de "seu site perde X clientes por mês" ou números inventados; nada de linguagem que diminua o negócio. O tom é "aqui está o que encontramos e o que daria para melhorar".
 - **Ritmo humano** no Google Maps e no Instagram: um negócio por vez, no máximo 80 por rodada. Verificação, CAPTCHA ou bloqueio: parar e avisar. Não digitar senhas.
 - **Não inventar:** sem informação, o campo fica vazio e o item não pontua.
+- **Avaliações viram tema, nunca citação:** resuma o que os clientes elogiam e do que reclamam, sem copiar frases nem citar quem avaliou.
 
 ## Arquivos desta skill
 
@@ -55,7 +56,13 @@ Mostre o ranking (negócios, quantos sem site, % sem site, avaliações médias,
 
 ## Passo 3 — Levantar os negócios
 
-Para cada nicho escolhido, busque no Google Maps (navegador ou ferramenta de busca de lugares, se a sessão tiver), por bairro quando a cidade for grande: "pet shop Jardim América Cidade X". Para cada negócio, registre em `trabalho/negocios.jsonl`: nome, nicho, bairro, cidade, telefone, WhatsApp, link do Maps, nota, número de avaliações, número de fotos, se tem horário, se responde às avaliações, site informado e Instagram. Detalhes em `checklist.md`.
+Para cada nicho escolhido, busque no Google Maps (navegador ou ferramenta de busca de lugares, se a sessão tiver), por bairro quando a cidade for grande: "pet shop Jardim América Cidade X". Para cada negócio, registre em `trabalho/negocios.jsonl`: nome, nicho, endereço completo, bairro, cidade, telefone, WhatsApp, link do Maps, nota, número de avaliações, número de fotos, se tem horário, se responde às avaliações, site informado e Instagram. Detalhes em `checklist.md`.
+
+Leia também as avaliações mais recentes (até 20) e resuma em uma linha cada:
+- `elogios`: o que os clientes mais elogiam ("pão de queijo, atendimento rápido").
+- `reclamacoes`: do que mais reclamam ("fila no fim de semana").
+
+Só temas que aparecem em mais de uma avaliação. Com menos de 5 avaliações, deixe os dois vazios.
 
 ## Passo 4 — Diagnosticar
 
@@ -77,19 +84,20 @@ python scripts/scout.py gerar trabalho/negocios.jsonl --briefing trabalho/briefi
 
 - **Presença digital (0-100):** site até 45, Google até 30, Instagram até 15, WhatsApp até 10.
 - **Oportunidade (0-100):** o que falta naquilo que a pessoa vende, multiplicado pela força do negócio (volume de avaliações e nota). Quente ≥ 70, Morno ≥ 45.
-- Saída: planilha com abas **Oportunidades**, **Nichos** e **Como usar**, e uma pasta `diagnosticos/` com um HTML de 1 página por negócio quente ou morno, com a marca de quem vende e botão de WhatsApp.
+- **Sem contato:** negócio sem telefone, WhatsApp nem Instagram sai do ranking e vai para a aba **Sem contato** (com endereço, para quem prefere visitar). Não gera diagnóstico.
+- Saída: planilha com abas **Oportunidades**, **Sem contato**, **Nichos** e **Como usar**; o mesmo conteúdo em `.csv` (para importar num CRM); e uma pasta `diagnosticos/` com um HTML de 1 página por negócio quente ou morno, com a marca de quem vende, botão de WhatsApp e, quando houver, o que os clientes mais elogiam.
 
 Abra pelo menos dois diagnósticos e confira cada item contra o que foi verificado antes de entregar.
 
 ## Passo 6 — Abordagem (opcional)
 
-Se a pessoa quiser, escreva uma mensagem por negócio quente (ver `abordagem.md`), citando o achado principal do diagnóstico, e coloque na coluna "Mensagem sugerida". Não envie nada.
+Se a pessoa quiser, escreva uma mensagem por negócio quente (ver `abordagem.md`), abrindo com o que os clientes elogiam e citando o achado principal do diagnóstico, e coloque na coluna "Mensagem sugerida". A reclamação nunca entra na primeira mensagem. Não envie nada.
 
 ## Passo 7 — Entrega
 
 Envie a planilha e os diagnósticos (ou publique os diagnósticos como páginas, se a sessão permitir e a pessoa pedir) e resuma:
 
-- quantos negócios avaliados, quantos sem site de verdade, quantos quentes;
+- quantos negócios avaliados, quantos sem site de verdade, quantos quentes e quantos ficaram sem contato;
 - os 5 primeiros com o achado principal ("412 avaliações e nenhum site");
 - o ranking de nichos, se houve a etapa de densidade;
 - o que ficou de fora e por quê (bloqueio, bairro sem resultados).

@@ -10,11 +10,13 @@ Uso:
       Ranking dos nichos: quantos negócios, quantos sem site, oportunidade média.
   python scout.py gerar trabalho/negocios.jsonl --briefing trabalho/briefing.json --marca trabalho/marca.json \
          --saida scout/ [--limite 30] [--diagnosticos 10]
-      Planilha (Oportunidades, Nichos, Como usar) e diagnósticos HTML dos mais quentes.
+      Planilha (Oportunidades, Sem contato, Nichos, Como usar), CSV para importar em CRM
+      e diagnósticos HTML dos mais quentes.
 
 Formato de cada negócio em references/campos.md.
 """
 import argparse
+import csv
 import html
 import json
 import math
@@ -150,6 +152,11 @@ def oportunidade(n, ofertas):
             "prioridade": "Quente" if op >= 70 else "Morno" if op >= 45 else "Frio"}
 
 
+def tem_contato(n):
+    """Telefone, WhatsApp ou Instagram: algum canal para abrir a conversa."""
+    return any(str(n.get(k) or "").strip() for k in ("telefone", "whatsapp", "instagram"))
+
+
 def melhorias(r, ofertas):
     falhas = [i for i in r["itens"] if not i[2]]
     ordem = {"site": 0, "google": 1, "whats": 2, "social": 3}
@@ -185,7 +192,34 @@ def cmd_nichos(a):
         print(f"{l['nicho'][:27]:<28}{l['total']:>6}{l['sem_site']:>10}{l['pct']:>6.0%}{l['quentes']:>9}{l['media_aval']:>13}{l['op_media']:>8}")
 
 
-def gravar_xlsx(regs, nichos, saida, briefing):
+SIT = {"sem_site": "sem site", "so_rede_social": "só rede social", "erro": "com erro", "construtor_basico": "página básica", "ok": "ok"}
+COLS = ["Oportunidade", "Prioridade", "Negócio", "Nicho", "Endereço", "Bairro", "Cidade", "Presença digital", "Site",
+        "Situação do site", "Nota Google", "Avaliações", "Clientes elogiam", "Clientes reclamam", "Instagram", "WhatsApp",
+        "Telefone", "O que falta (principal)", "Diagnóstico", "Mensagem sugerida", "Google Maps", "Observações"]
+LARG = [12, 10, 30, 18, 34, 16, 14, 11, 30, 14, 10, 10, 40, 40, 18, 16, 16, 46, 30, 50, 36, 30]
+QUEBRA = {"Endereço", "Clientes elogiam", "Clientes reclamam", "O que falta (principal)", "Mensagem sugerida", "Observações"}
+
+
+def linha(r):
+    x = r["_r"]
+    return [x["oportunidade"], x["prioridade"], r.get("nome", ""), r.get("nicho", ""), r.get("endereco", ""), r.get("bairro", ""),
+            r.get("cidade", ""), x["presenca"], r.get("site", ""), SIT.get(x["site_status"], x["site_status"]), r.get("nota", ""),
+            r.get("avaliacoes", ""), r.get("elogios", ""), r.get("reclamacoes", ""), r.get("instagram", ""), r.get("whatsapp", ""),
+            r.get("telefone", ""), "; ".join(i[1] for i in x["melhorias"]), x.get("diag_arquivo", ""), r.get("mensagem", ""),
+            r.get("maps_url", ""), r.get("observacoes", "")]
+
+
+def gravar_csv(regs, sem_contato, saida):
+    """CSV (UTF-8, vírgula) para importar em CRM. A coluna 'Lista' separa quem está sem contato."""
+    with open(saida, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Lista"] + COLS)
+        for nome, rs in (("Oportunidades", regs), ("Sem contato", sem_contato)):
+            for r in rs:
+                w.writerow([nome] + linha(r))
+
+
+def gravar_xlsx(regs, nichos, saida, briefing, sem_contato=()):
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Font, PatternFill
     from openpyxl.utils import get_column_letter
@@ -197,35 +231,33 @@ def gravar_xlsx(regs, nichos, saida, briefing):
     wb.properties.description = "Gerada pela skill gratuita Scout de negócios sem site, da Trentin Solutions (trentinsolutions.com.br)."
     ws = wb.active
     ws.title = "Oportunidades"
-    cols = ["Oportunidade", "Prioridade", "Negócio", "Nicho", "Bairro", "Cidade", "Presença digital", "Site", "Situação do site",
-            "Nota Google", "Avaliações", "Instagram", "WhatsApp", "Telefone", "O que falta (principal)", "Diagnóstico",
-            "Mensagem sugerida", "Google Maps", "Observações"]
-    ws.append(cols)
-    sit = {"sem_site": "sem site", "so_rede_social": "só rede social", "erro": "com erro", "construtor_basico": "página básica", "ok": "ok"}
-    for r in regs:
-        x = r["_r"]
-        falta = "; ".join(i[1] for i in x["melhorias"])
-        ws.append([x["oportunidade"], x["prioridade"], r.get("nome", ""), r.get("nicho", ""), r.get("bairro", ""), r.get("cidade", ""),
-                   x["presenca"], r.get("site", ""), sit.get(x["site_status"], x["site_status"]), r.get("nota", ""),
-                   r.get("avaliacoes", ""), r.get("instagram", ""), r.get("whatsapp", ""), r.get("telefone", ""), falta,
-                   x.get("diag_arquivo", ""), r.get("mensagem", ""), r.get("maps_url", ""), r.get("observacoes", "")])
-    for i, w_ in enumerate([12, 10, 30, 18, 16, 14, 11, 30, 14, 10, 10, 18, 16, 16, 46, 30, 50, 36, 30], 1):
-        ws.column_dimensions[get_column_letter(i)].width = w_
-    for c in ws[1]:
-        c.fill, c.font = azul, branco
-    for row in ws.iter_rows(min_row=2):
-        for c in row:
-            c.font = corpo
-            c.alignment = Alignment(vertical="top", wrap_text=c.column in (15, 17, 19))
-        row[1].fill = PatternFill("solid", fgColor=cores.get(row[1].value, "FFFFFF"))
-        row[0].font = Font(name="Arial", size=10, bold=True)
-        for j in (7, 17):
-            v = row[j].value
-            if v and str(v).startswith("http"):
-                row[j].hyperlink = v
-                row[j].font = Font(name="Arial", size=10, color="3A6AB4", underline="single")
-    ws.freeze_panes = "D2"
-    ws.auto_filter.ref = ws.dimensions
+    def aba(w, linhas):
+        w.append(COLS)
+        for r in linhas:
+            w.append(linha(r))
+        for i, w_ in enumerate(LARG, 1):
+            w.column_dimensions[get_column_letter(i)].width = w_
+        for c in w[1]:
+            c.fill, c.font = azul, branco
+        quebra = {i + 1 for i, c in enumerate(COLS) if c in QUEBRA}
+        links = [i for i, c in enumerate(COLS) if c in ("Site", "Google Maps")]
+        for row in w.iter_rows(min_row=2):
+            for c in row:
+                c.font = corpo
+                c.alignment = Alignment(vertical="top", wrap_text=c.column in quebra)
+            row[1].fill = PatternFill("solid", fgColor=cores.get(row[1].value, "FFFFFF"))
+            row[0].font = Font(name="Arial", size=10, bold=True)
+            for j in links:
+                v = row[j].value
+                if v and str(v).startswith("http"):
+                    row[j].hyperlink = v
+                    row[j].font = Font(name="Arial", size=10, color="3A6AB4", underline="single")
+        w.freeze_panes = "D2"
+        w.auto_filter.ref = w.dimensions
+
+    aba(ws, regs)
+    if sem_contato:
+        aba(wb.create_sheet("Sem contato"), sem_contato)
 
     wn = wb.create_sheet("Nichos")
     wn.append(["Nicho", "Negócios", "Sem site (ou só rede social)", "% sem site", "Quentes", "Avaliações em média", "Oportunidade média"])
@@ -247,6 +279,9 @@ def gravar_xlsx(regs, nichos, saida, briefing):
               "Presença digital (0-100): site até 45, Google até 30, Instagram até 15, WhatsApp até 10. Quanto menor, mais espaço para melhorar.",
               "Oportunidade (0-100): o que falta naquilo que você vende, multiplicado pela força do negócio (avaliações e nota).",
               "Quente ≥ 70: negócio estabelecido com lacuna clara. Comece por eles.",
+              "Clientes elogiam / reclamam: resumo dos temas das avaliações recentes no Google. Use o elogio para abrir a conversa; a reclamação é só para você entender o negócio.",
+              "Sem contato: negócios sem telefone, WhatsApp nem Instagram. Ficam fora do ranking, mas podem valer uma visita (veja o endereço).",
+              "O mesmo conteúdo vai num arquivo .csv, para importar num CRM.",
               "Diagnóstico: página de 1 folha por negócio, para enviar como abertura da conversa. Confira antes de mandar.",
               "LGPD: dados públicos de empresas, usados para contato comercial. Remova quem pedir para sair.", "",
               "Skill gratuita da Trentin Solutions, criada por Ivaldo Trentin · trentinsolutions.com.br",
@@ -291,7 +326,7 @@ footer{padding:14px 30px;color:var(--suave);font-size:.76rem}
 <div class="topo"><div class="gauge" style="--v:__NOTA__"><div><div><b>__NOTA__</b><br><span>de 100</span></div></div></div>
 <div><h2>__RESUMO__</h2><p>Este é um retrato de como o negócio aparece hoje para quem procura no Google, no Maps e nas redes. Os dados são públicos e foram verificados em __DATA__.</p></div></div>
 <section><h3>O que encontramos</h3><ul>__ITENS__</ul></section>
-<section><h3>Melhorias de maior impacto</h3><ol>__MELHORIAS__</ol></section>
+__ELOGIOS__<section><h3>Melhorias de maior impacto</h3><ol>__MELHORIAS__</ol></section>
 <div class="cta"><div><b>__VENDEDOR__</b><br><span style="color:var(--suave)">__CHAMADA__</span></div>__BOTAO__</div>
 <footer>Diagnóstico gerado com a skill gratuita Scout de negócios sem site, da Trentin Solutions · trentinsolutions.com.br</footer>
 </div></body></html>"""
@@ -325,11 +360,13 @@ def gerar_diag(r, marca, ofertas, pasta):
     msg = quote(f"Oi! Recebi o diagnóstico da {r.get('nome', '')} e quero conversar.")
     botao = f'<a href="https://wa.me/{wa}?text={msg}">Conversar no WhatsApp</a>' if wa else ""
     pagina = (DIAG.replace("__COR__", marca.get("cor", "#3a6ab4")).replace("__NEGOCIO__", html.escape(r.get("nome", "")))
-              .replace("__LOCAL__", html.escape(" · ".join(x for x in (r.get("nicho"), r.get("bairro"), r.get("cidade")) if x)))
+              .replace("__LOCAL__", html.escape(" · ".join(x for x in (r.get("nicho"), r.get("endereco") or r.get("bairro"), r.get("cidade")) if x)))
               .replace("__DATA__", HOJE.strftime("%d/%m/%Y")).replace("__NOTA__", str(pres)).replace("__RESUMO__", html.escape(resumo))
               .replace("__ITENS__", itens).replace("__MELHORIAS__", mel).replace("__VENDEDOR__", html.escape(marca.get("nome", "")))
               .replace("__CHAMADA__", html.escape(marca.get("chamada", "Posso ajudar a resolver esses pontos.")))
-              .replace("__BOTAO__", botao))
+              .replace("__BOTAO__", botao)
+              .replace("__ELOGIOS__", f'<section><h3>O que os clientes mais elogiam</h3><p style="margin:0">{html.escape(r["elogios"])}</p></section>'
+                       if str(r.get("elogios") or "").strip() else ""))
     nome = os.path.join(pasta, f"diagnostico_{slug(r.get('nome'))}.html")
     with open(nome, "w", encoding="utf-8") as f:
         f.write(pagina)
@@ -352,6 +389,8 @@ def cmd_gerar(a):
     nichos = tabela_nichos(regs)
     lista = [r for r in regs if not nichos_alvo or norm(r.get("nicho")) in nichos_alvo]
     lista.sort(key=lambda r: (-r["_r"]["oportunidade"], -int(r.get("avaliacoes") or 0)))
+    sem_contato = [r for r in lista if not tem_contato(r)]
+    lista = [r for r in lista if tem_contato(r)]
     if a.limite:
         lista = lista[:a.limite]
     os.makedirs(a.saida, exist_ok=True)
@@ -362,14 +401,16 @@ def cmd_gerar(a):
         if feitos < a.diagnosticos and r["_r"]["prioridade"] in ("Quente", "Morno"):
             r["_r"]["diag_arquivo"] = os.path.relpath(gerar_diag(r, marca, ofertas, pasta_d), a.saida)
             feitos += 1
-    planilha = os.path.join(a.saida, f"scout_{slug(briefing.get('cidade', 'cidade'))}.xlsx")
+    base = os.path.join(a.saida, f"scout_{slug(briefing.get('cidade', 'cidade'))}")
+    gravar_csv(lista, sem_contato, base + ".csv")
     try:
-        gravar_xlsx(lista, nichos, planilha, briefing)
+        gravar_xlsx(lista, nichos, base + ".xlsx", briefing, sem_contato)
     except ImportError:
-        print("openpyxl não instalado (pip install openpyxl); planilha não gerada.")
+        print("openpyxl não instalado (pip install openpyxl); planilha não gerada, só o CSV.")
     q = sum(1 for r in lista if r["_r"]["prioridade"] == "Quente")
     sem = sum(1 for r in lista if r["_r"]["site_status"] in ("sem_site", "so_rede_social", "erro"))
-    print(f"{len(regs)} negócios avaliados · {len(lista)} na lista · {sem} sem site de verdade · {q} quentes · {feitos} diagnósticos -> {a.saida}")
+    print(f"{len(regs)} negócios avaliados · {len(lista)} na lista · {len(sem_contato)} sem contato (aba à parte) · "
+          f"{sem} sem site de verdade · {q} quentes · {feitos} diagnósticos -> {a.saida}")
     for r in lista[:5]:
         x = r["_r"]
         print(f"  {x['oportunidade']:>3} {x['prioridade']:<6} {r.get('nome', '')[:30]:<30} presença {x['presenca']:>3} · {r.get('avaliacoes', 0)} avaliações · falta: {', '.join(i[1] for i in x['melhorias'][:2])}")

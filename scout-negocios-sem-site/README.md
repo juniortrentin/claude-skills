@@ -5,11 +5,11 @@ Uma skill para o Claude para quem vende site, landing page, loja virtual, perfil
 ## O que ela faz
 
 1. **Descobre os melhores nichos** da cidade: quantos negócios, quantos sem site e quantas avaliações em média.
-2. **Levanta os negócios** no Google Maps: avaliações, fotos, horário, telefone, site e Instagram.
+2. **Levanta os negócios** no Google Maps: endereço, avaliações, fotos, horário, telefone, site e Instagram, e resume o que os clientes mais elogiam e do que reclamam.
 3. **Diagnostica a presença digital:** site (existe, abre, é seguro, funciona no celular, está atualizado, tem WhatsApp), perfil no Google e Instagram.
 4. **Dá uma nota de oportunidade:** o que falta naquilo que você vende, multiplicado pela força do negócio. Sem site e com 400 avaliações vem antes de sem site e sem clientes.
 5. **Gera um diagnóstico de 1 página** por negócio, com a sua marca e o botão do seu WhatsApp.
-6. **Escreve a mensagem de abordagem** (opcional) e entrega tudo numa planilha.
+6. **Escreve a mensagem de abordagem** (opcional), abrindo pelo elogio dos clientes, e entrega tudo numa planilha e num CSV para CRM. Quem não tem telefone, WhatsApp nem Instagram vai para uma aba à parte, com endereço para visita.
 
 ## O que vem no pacote
 

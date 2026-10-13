@@ -4,7 +4,8 @@ O diagnóstico de 1 página é a abertura. Ele mostra que você olhou o negócio
 
 ## Regras
 
-- Comece pelo que o negócio tem de bom (avaliações, fotos, tempo de casa), depois o achado.
+- Comece pelo que o negócio tem de bom: o que os clientes mais elogiam (coluna "Clientes elogiam"), as avaliações, as fotos. Depois o achado.
+- Nunca use a reclamação dos clientes na abordagem. Ela serve só para você entender o negócio e, na conversa, mostrar como um site ou o Google ajudam (ex.: horário e cardápio online reduzem a fila).
 - Um achado principal por mensagem. O resto está no diagnóstico.
 - Sem números inventados, sem "você está perdendo clientes", sem pressão.
 - Ofereça o diagnóstico antes de oferecer o serviço: "posso te mandar?" funciona melhor do que mandar sem pedir.
@@ -13,7 +14,7 @@ O diagnóstico de 1 página é a abertura. Ele mostra que você olhou o negócio
 ## Modelos
 
 **Sem site, muitas avaliações**
-> Oi! Tudo bem? Vi que a Padaria Pão Dourado tem 412 avaliações no Google com nota 4,7, que coisa boa. Reparei que vocês ainda não têm um site próprio, então quem procura no Google cai direto no Maps. Fiz um diagnóstico rápido de 1 página de como vocês aparecem na internet. Posso te mandar?
+> Oi! Tudo bem? Vi que a Padaria Pão Dourado tem 412 avaliações no Google com nota 4,7, e o pessoal não para de elogiar o pão de queijo. Reparei que vocês ainda não têm um site próprio, então quem procura no Google cai direto no Maps. Fiz um diagnóstico rápido de 1 página de como vocês aparecem na internet. Posso te mandar?
 
 **Site só com rede social**
 > Oi! Vi que o site da Oficina Motor Bom no Google leva para o Instagram, que está bem ativo, parabéns. Fiz um diagnóstico de 1 página com o que daria para melhorar para quem procura oficina no bairro pelo Google. Quer que eu envie?

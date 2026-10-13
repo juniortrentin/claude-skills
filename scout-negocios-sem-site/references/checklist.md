@@ -13,6 +13,17 @@ Registre só o que foi verificado. Na dúvida, deixe o campo vazio.
 | `responde_avaliacoes` | o dono respondeu a alguma das 10 avaliações mais recentes? (true/false) |
 | `telefone`, `whatsapp` | telefone do perfil; WhatsApp se aparecer como botão ou no texto |
 | `site` | endereço do campo "site" do perfil (pode estar vazio) |
+| `endereco` | rua e número como aparecem no perfil (sem CEP) |
+| `elogios`, `reclamacoes` | ver "Avaliações" abaixo |
+
+## Avaliações (o que os clientes dizem)
+
+Leia as avaliações mais recentes (ordenar por "Mais recentes", até 20) e escreva uma linha para cada campo:
+
+- `elogios`: os 2 ou 3 temas mais elogiados ("pão de queijo, atendimento rápido, café da manhã").
+- `reclamacoes`: os 1 ou 2 temas que mais aparecem como queixa ("fila no fim de semana").
+
+Regras: só temas que aparecem em mais de uma avaliação; nada de copiar frases, citar nomes de quem avaliou ou de funcionários; com menos de 5 avaliações, deixe vazio. A reclamação serve para quem vende entender o negócio, não para usar na abordagem.
 
 ## Site
 

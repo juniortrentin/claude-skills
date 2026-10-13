@@ -19,15 +19,22 @@ Ofertas: `site`, `landing`, `loja`, `google`, `redes`, `trafego`, `whatsapp`. `n
 ## Um negócio por linha em `trabalho/negocios.jsonl`
 
 ```json
-{"nome": "Padaria Pão Dourado", "nicho": "Padarias", "bairro": "Centro", "cidade": "Cidade Exemplo",
+{"nome": "Padaria Pão Dourado", "nicho": "Padarias", "endereco": "Rua das Flores, 120", "bairro": "Centro", "cidade": "Cidade Exemplo",
  "telefone": "(14) 3000-0001", "whatsapp": "", "maps_url": "https://maps.google.com/?cid=1",
  "nota": 4.7, "avaliacoes": 412, "fotos_maps": 35, "horario": true, "responde_avaliacoes": false,
  "site": "", "site_status": "sem_site", "https": null, "mobile": null, "ano_rodape": null,
  "whatsapp_no_site": null, "instagram": "@paodourado", "insta_ultimo_post": "2026-09-02",
- "mensagem": "", "observacoes": ""}
+ "elogios": "Pão de queijo, atendimento rápido e café da manhã caprichado.",
+ "reclamacoes": "Fila longa no fim de semana.", "mensagem": "", "observacoes": ""}
 ```
 
-O script remove duplicados (mesmo nome e telefone).
+O script remove duplicados (mesmo nome e telefone). Negócio sem `telefone`, `whatsapp` nem `instagram` vai para a aba **Sem contato**, fora do ranking e sem diagnóstico.
+
+## Saídas
+
+- `scout_<cidade>.xlsx`: abas Oportunidades, Sem contato, Nichos e Como usar.
+- `scout_<cidade>.csv`: o mesmo conteúdo (UTF-8, separado por vírgula), com a coluna `Lista` indicando Oportunidades ou Sem contato. Serve para importar em CRM.
+- `diagnosticos/`: um HTML de 1 página por negócio quente ou morno.
 
 ## Presença digital (0 a 100)
 
