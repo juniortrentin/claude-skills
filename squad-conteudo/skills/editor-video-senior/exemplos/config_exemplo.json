@@ -1,0 +1,345 @@
+{
+ "video": "meu_video.mp4",
+ "saida": "resultado/cafe_aurora_reels.mp4",
+ "formato": {
+  "largura": 1080,
+  "altura": 1920,
+  "fps": 30
+ },
+ "marca": {
+  "nome": "Café Aurora",
+  "cores": {
+   "primaria": "#C2410C",
+   "secundaria": "#EA9A3E",
+   "fundo": "#FAF3E8",
+   "tinta": "#1C1410",
+   "branco": "#ffffff"
+  },
+  "fontes": {
+   "titulo": {
+    "nome": "bebas-neue",
+    "peso": 400
+   },
+   "texto": {
+    "nome": "inter"
+   }
+  },
+  "logo": "logo_cafe_aurora.png",
+  "granulado": 6,
+  "cantoneiras": true,
+  "barra_progresso": true,
+  "movimento": {
+   "curva": [
+    0.16,
+    1,
+    0.3,
+    1
+   ],
+   "duracao": 0.52
+  }
+ },
+ "trechos": [
+  {
+   "de": 0.3,
+   "ate": 3.8,
+   "texto": "Você sabia que dá para fazer um café de cafeteria em casa?",
+   "zoom": 1.0,
+   "punch": {
+    "palavra": "casa",
+    "zoom": 1.14
+   }
+  },
+  {
+   "de": 4.1,
+   "ate": 6.0,
+   "texto": "No sábado, dia 8 de novembro,",
+   "zoom": 1.12
+  },
+  {
+   "de": 6.3,
+   "ate": 8.4,
+   "texto": "eu e a barista Ana Lima",
+   "zoom": 1.0
+  },
+  {
+   "de": 8.7,
+   "ate": 12.0,
+   "texto": "vamos ensinar três métodos de preparo.",
+   "zoom": 1.08
+  },
+  {
+   "de": 12.3,
+   "ate": 14.2,
+   "texto": "A aula é gratuita.",
+   "zoom": 1.15
+  },
+  {
+   "de": 14.5,
+   "ate": 15.1,
+   "texto": "Vem!",
+   "zoom": 1.2
+  }
+ ],
+ "profundidade": {
+  "ativo": true,
+  "desfoque": 10,
+  "rack_focus": 0.9
+ },
+ "legendas": {
+  "estilo": "karaoke",
+  "tamanho": 66,
+  "y": 1390,
+  "maiusculas": true,
+  "caixa": true,
+  "destaques": [
+   "café",
+   "casa",
+   "sábado",
+   "8 de novembro",
+   "ana lima",
+   "três métodos",
+   "gratuita",
+   "vem"
+  ]
+ },
+ "elementos": [
+  {
+   "tipo": "texto_atras",
+   "texto": "CAFÉ",
+   "tamanho": 620,
+   "cor": "primaria",
+   "y": 680,
+   "de": {
+    "tempo": 0.15
+   },
+   "ate": {
+    "trecho": 1
+   }
+  },
+  {
+   "tipo": "texto_atras",
+   "texto": "08.11",
+   "tamanho": 540,
+   "cor": "fundo",
+   "y": 600,
+   "de": {
+    "trecho": 1
+   },
+   "ate": {
+    "trecho": 2
+   }
+  },
+  {
+   "tipo": "texto_atras",
+   "texto": "VEM!",
+   "tamanho": 560,
+   "cor": "primaria",
+   "y": 560,
+   "de": {
+    "trecho": 5
+   },
+   "ate": {
+    "fim": true,
+    "ajuste": 0.4
+   }
+  },
+  {
+   "tipo": "rotulo",
+   "texto": "CAFÉ AURORA",
+   "tamanho": 30,
+   "cor": "fundo",
+   "x": 70,
+   "y": 128,
+   "ancora": "tl",
+   "entrada": {
+    "dy": -30
+   },
+   "de": {
+    "tempo": 0.1
+   },
+   "ate": {
+    "trecho": 1
+   }
+  },
+  {
+   "tipo": "pilula",
+   "texto": "AULA ABERTA · MÉTODOS DE PREPARO",
+   "tamanho": 28,
+   "cor_texto": "branco",
+   "cor_fundo": "primaria",
+   "padx": 28,
+   "pady": 18,
+   "espacamento": 0.12,
+   "x": 70,
+   "y": 182,
+   "ancora": "tl",
+   "entrada": {
+    "dx": -40,
+    "dy": 0
+   },
+   "som": false,
+   "de": {
+    "tempo": 0.35
+   },
+   "ate": {
+    "trecho": 1
+   }
+  },
+  {
+   "tipo": "pilula",
+   "texto": "SÁBADO, 8 DE NOVEMBRO",
+   "tamanho": 40,
+   "cor_texto": "primaria",
+   "cor_fundo": "tinta",
+   "padx": 36,
+   "pady": 24,
+   "espacamento": 0.1,
+   "x": 540,
+   "y": 1040,
+   "entrada": {
+    "dy": 50
+   },
+   "de": {
+    "palavra": "sábado",
+    "ajuste": -0.05
+   },
+   "ate": {
+    "trecho": 2,
+    "ajuste": 0.4
+   }
+  },
+  {
+   "tipo": "nome",
+   "rotulo": "COM",
+   "texto": "BARISTA ANA LIMA",
+   "tamanho": 84,
+   "y": 1020,
+   "de": {
+    "palavra": "barista",
+    "ajuste": -0.1
+   },
+   "ate": {
+    "trecho": 3,
+    "ajuste": 0.3
+   }
+  },
+  {
+   "tipo": "icone",
+   "icone": "check",
+   "texto": "3 MÉTODOS",
+   "x": 870,
+   "y": 850,
+   "entrada": {
+    "dy": 80,
+    "escala": 0.85
+   },
+   "de": {
+    "palavra": "métodos",
+    "ajuste": -0.05
+   },
+   "ate": {
+    "trecho": 4
+   }
+  },
+  {
+   "tipo": "pilula",
+   "texto": "GRATUITA",
+   "fonte": "titulo",
+   "tamanho": 120,
+   "cor_texto": "branco",
+   "cor_fundo": "primaria",
+   "padx": 56,
+   "pady": 34,
+   "raio": 24,
+   "x": 540,
+   "y": 1100,
+   "entrada": {
+    "dy": 0,
+    "escala": 1.15,
+    "duracao": 0.4
+   },
+   "de": {
+    "palavra": "gratuita",
+    "ajuste": -0.06
+   },
+   "ate": {
+    "fim": true,
+    "ajuste": 0.3
+   }
+  }
+ ],
+ "tela_final": {
+  "duracao": 3.6,
+  "fundo": "fundo",
+  "itens": [
+   {
+    "tipo": "rotulo",
+    "texto": "AULA ABERTA E GRATUITA",
+    "tamanho": 34,
+    "cor": "primaria",
+    "y": 330,
+    "atraso": 0.0
+   },
+   {
+    "tipo": "titulo",
+    "texto": "CAFÉ DE",
+    "tamanho": 230,
+    "cor": "primaria",
+    "y": 520,
+    "atraso": 0.08
+   },
+   {
+    "tipo": "titulo",
+    "texto": "CAFETERIA",
+    "tamanho": 190,
+    "cor": "tinta",
+    "y": 740,
+    "atraso": 0.16
+   },
+   {
+    "tipo": "pilula",
+    "texto": "SÁBADO · 08/11",
+    "tamanho": 74,
+    "cor_texto": "fundo",
+    "cor_fundo": "tinta",
+    "y": 960,
+    "atraso": 0.26
+   },
+   {
+    "tipo": "texto",
+    "texto": "com a barista Ana Lima",
+    "tamanho": 40,
+    "peso": 600,
+    "cor": "tinta",
+    "y": 1070,
+    "atraso": 0.32
+   },
+   {
+    "tipo": "botao",
+    "texto": "RESERVE SEU LUGAR",
+    "tamanho": 46,
+    "y": 1260,
+    "atraso": 0.42,
+    "seta": true
+   },
+   {
+    "tipo": "link",
+    "texto": "LINK NA BIO",
+    "tamanho": 30,
+    "cor": "tinta",
+    "y": 1370,
+    "atraso": 0.48
+   },
+   {
+    "tipo": "logo",
+    "largura": 420,
+    "y": 1620,
+    "atraso": 0.56
+   }
+  ]
+ },
+ "audio": {
+  "efeitos": true,
+  "trilha": null
+ }
+}

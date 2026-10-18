@@ -1,0 +1,12 @@
+{
+  "name": "trentin-solutions",
+  "owner": {"name": "Ivaldo Trentin · Trentin Solutions", "url": "https://trentinsolutions.com.br"},
+  "metadata": {"description": "Skills e plugins gratuitos da Trentin Solutions para o Claude, em português."},
+  "plugins": [
+    {
+      "name": "squad-conteudo",
+      "source": "./squad-conteudo",
+      "description": "Squad de produção de conteúdo em vídeo: produtor, editor, revisor e copywriter, cada um com o seu modelo."
+    }
+  ]
+}

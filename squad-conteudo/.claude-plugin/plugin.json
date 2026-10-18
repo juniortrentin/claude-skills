@@ -1,0 +1,11 @@
+{
+  "name": "squad-conteudo",
+  "displayName": "Squad de conteúdo · Trentin Solutions",
+  "version": "1.0.0",
+  "description": "Squad de produção de conteúdo em vídeo: produtor, editor (Opus), revisor (Sonnet) e copywriter (Sonnet). Do vídeo bruto ao post pronto, com revisão e aprendizado a cada entrega.",
+  "author": {"name": "Ivaldo Trentin · Trentin Solutions", "url": "https://trentinsolutions.com.br"},
+  "homepage": "https://trentinsolutions.com.br",
+  "repository": "https://github.com/juniortrentin/claude-skills",
+  "license": "CC-BY-4.0",
+  "keywords": ["video", "reels", "instagram", "tiktok", "conteudo", "legendas", "pt-br"]
+}
