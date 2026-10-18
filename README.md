@@ -24,6 +24,14 @@ Criadas por [Ivaldo Trentin](https://www.linkedin.com/in/ivaldotrentin/), arquit
 | [Scout de negócios sem site](scout-negocios-sem-site/) | Para quem vende site, landing page, loja virtual, perfil no Google, redes sociais, tráfego pago ou atendimento no WhatsApp. Descobre os nichos com mais oportunidade na cidade, levanta os negócios no Google Maps, verifica a presença digital de cada um, ordena pela oportunidade e gera um diagnóstico de 1 página por negócio com a marca de quem vende. | [.zip](https://trentinsolutions.com.br/downloads/scout-negocios-sem-site.zip) · [página](https://trentinsolutions.com.br/skills/scout-negocios-sem-site) |
 | [Avaliações do Google respondidas](avaliacoes-google-respondidas/) | Para negócios locais com perfil no Google. Lê as avaliações, escreve uma resposta para cada uma no tom do dono, separa as que pedem cuidado, mostra o que os clientes mais elogiam e mais reclamam e entrega uma planilha para aprovar e um relatório de 1 página. Só publica respostas com aprovação. | [.zip](https://trentinsolutions.com.br/downloads/avaliacoes-google-respondidas.zip) · [página](https://trentinsolutions.com.br/skills/avaliacoes-google-respondidas) |
 
+### Conteúdo (plugin para o Claude Code)
+
+| Plugin | O que resolve | Instalar |
+|---|---|---|
+| [Squad de conteúdo](squad-conteudo/) | Um time de agentes que transforma o vídeo gravado no celular em post pronto. O produtor faz o briefing e coordena; o editor (Opus) corta, legenda, aplica profundidade, elementos e tela final na identidade da marca; o revisor (Sonnet) confere legendas, rosto, cortes e áreas do app olhando cada quadro; o copywriter (Sonnet) escreve 3 legendas, hashtags, capa e texto alternativo, sem inventar dados. Aprende com cada entrega. | `/plugin marketplace add juniortrentin/claude-skills` e depois `/plugin install squad-conteudo@trentin-solutions` |
+
+As quatro skills do squad também funcionam sozinhas no claude.ai: compacte a pasta da skill em [squad-conteudo/skills](squad-conteudo/skills/) e envie nas configurações.
+
 ## Como instalar
 
 1. Baixe o .zip da skill (link na tabela acima ou na página da skill). Se preferir, compacte a pasta da skill deste repositório.
